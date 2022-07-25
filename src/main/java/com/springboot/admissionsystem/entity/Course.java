@@ -1,66 +1,65 @@
 package com.springboot.admissionsystem.entity;
-import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
+@Table(name="course")
 public class Course {
 
-@Id
-		 public int courseId;
-		 private String courseName;
-		 private String courseDuration;
-	   	 private LocalDate courseStartDate;
-		 private LocalDate courseEndDate;
-		 
-		 
-		public Course(int courseId, String courseName, String courseDuration, LocalDate courseStartDate,
-				LocalDate courseEndDate) {
-			super();
-			this.courseId = courseId;
-			this.courseName = courseName;
-			this.courseDuration = courseDuration;
-			this.courseStartDate = courseStartDate;
-			this.courseEndDate = courseEndDate;
-		}
-		public int getCourseId() {
-			return courseId;
-		}
-		public void setCourseId(int courseId) {
-			this.courseId = courseId;
-		}
-		public String getCourseName() {
-			return courseName;
-		}
-		public void setCourseName(String courseName) {
-			this.courseName = courseName;
-		}
-		public String getCourseDuration() {
-			return courseDuration;
-		}
-		public void setCourseDuration(String courseDuration) {
-			this.courseDuration = courseDuration;
-		}
-		public LocalDate getCourseStartDate() {
-			return courseStartDate;
-		}
-		public void setCourseStartDate(LocalDate courseStartDate) {
-			this.courseStartDate = courseStartDate;
-		}
-		public LocalDate getCourseEndDate() {
-			return courseEndDate;
-		}
-		public void setCourseEndDate(LocalDate courseEndDate) {
-			this.courseEndDate = courseEndDate;
-		}
-		@Override
-		public String toString() {
-			return "courses [courseId=" + courseId + ", courseName=" + courseName + ", courseDuration=" + courseDuration
-					+ ", courseStartDate=" + courseStartDate + ", courseEndDate=" + courseEndDate + "]";
-		}
-		
+	@Id
+	@Column (name="id")
+	private int id;
+	
+	@Column(name="course_name")
+	private String courseName;
+	
+	@Column(name="duration")
+	private long duration;
+	
+	
+	public Course(int id, String courseName, long duration) {
+		super();
+		this.id = id;
+		this.courseName = courseName;
+		this.duration=duration;
+	}
 
 	
 
+	public int getCid() {
+		return id;
+	}
+
+
+
+	public void setCid(int id) {
+		this.id = id;
+	}
+
+
+
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	
+	
+	public long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(long duration) {
+		this.duration = duration;
+	}
+	public Course() {
+		super();
+	}
+	
 }

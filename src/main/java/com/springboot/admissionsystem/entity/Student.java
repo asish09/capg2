@@ -1,64 +1,79 @@
 package com.springboot.admissionsystem.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 import javax.persistence.Id;
-	
+
+import javax.persistence.Table;
+
 @Entity
+@Table(name="student")
 public class Student {
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private int sid;
-		public int getSid() {
-			return sid;
-		}
-		public void setSid(int sid) {
-			this.sid = sid;
-		}
-		private String student_name, date_of_birth, email, phone, father_name, mother_name, address;
-		public String getStudent_name() {
-			return student_name;
-		}
-		public void setStudent_name(String student_name) {
-			this.student_name = student_name;
-		}
-		public String getDate_of_birth() {
-			return date_of_birth;
-		}
-		public void setDate_of_birth(String date_of_birth) {
-			this.date_of_birth = date_of_birth;
-		}
-		public String getEmail() {
-			return email;
-		}
-		public void setEmail(String email) {
-			this.email = email;
-		}
-		public String getPhone() {
-			return phone;
-		}
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
-		public String getFather_name() {
-			return father_name;
-		}
-		public void setFather_name(String father_name) {
-			this.father_name = father_name;
-		}
-		public String getMother_name() {
-			return mother_name;
-		}
-		public void setMother_name(String mother_name) {
-			this.mother_name = mother_name;
-		}
-		public String getAddress() {
-			return address;
-		}
-		public void setAddress(String address) {
-			this.address = address;
-		}
+	@Id
+	
+	private int id;
+	@Column(name="name")
+	private String name;
+	@Column (name="mobile_number")
+	private long mobileNumber;
+	@Column (name="email")
+	private String email;
+	@Column (name="password")
+	private String password;
+	@Column (name="confirm_password")
+	private String confirmPassword;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public long getMobileNumber() {
+		return mobileNumber;
+	}
+	public void setMobileNumber(long mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	public Student(int id, String name, long mobileNumber, String email, String password, String confirmPassword) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mobileNumber = mobileNumber;
+		this.email = email;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+	}
+	public Student() {
+		super();
+		
+	}
+	
+	
+
 }
-		
-		

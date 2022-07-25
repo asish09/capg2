@@ -1,33 +1,54 @@
 package com.springboot.admissionsystem.entity;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-	
-@Entity
 
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="university")
 public class University {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int uid;
-	public int getUid() {
-		return uid;
+
+	@Column (name="id")
+	private int id;
+	@Column (name="universityName")
+	private String universityName;
+	@Column (name="location")
+	private String location;
+	
+	public int getId() {
+		return this.id;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	private String university_name,location;
-	public String getUniversity_name() {
-		return university_name;
+
+	public String getUniversityName() {
+		return this.universityName;
 	}
-	public void setUniversity_name(String university_name) {
-		this.university_name = university_name;
+
+	public void setUniversityName(String universityName) {
+		this.universityName = universityName;
 	}
+
 	public String getLocation() {
-		return location;
+		return this.location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
+	public University(int id, String universityName, String location ) {
+		super();
+		this.id =id ;
+		this.universityName = universityName;
+		this.location=location;
+	}
+	public University() {
+		super();
+	}
+	
 }

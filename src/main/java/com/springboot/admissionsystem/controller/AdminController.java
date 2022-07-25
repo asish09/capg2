@@ -2,58 +2,50 @@ package com.springboot.admissionsystem.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.admissionsystem.entity.Admin;
 import com.springboot.admissionsystem.service.AdminService;
 
-@Controller
+
+
+@RestController
+@CrossOrigin(origins = "http://localhost:8085/")
 public class AdminController {
+	
 	@Autowired
-	public AdminService adService;
+	private AdminService adminService;
 	
-//	@RequestMapping(value ="/logind", method = RequestMethod.GET)
-//	public String loginDoc(ModelMap model) {
-//		System.out.println("Admin's login page");
-//		return "logind";
-//	}
-	@RequestMapping(value ="/logind", method = RequestMethod.POST)
-	public String loginPageAdmin(ModelMap model, @RequestParam String username, String password) {
-		boolean isValid = adService.validateAdmin(username, password);
-		if(!isValid) {
-			model.put("errorMessage", "Error!!! Please use the appropriate credentials");
-			System.out.println("Invalid credentials");
-			return "logind";
-		}
-		return "displayD";
+	
+	@PostMapping("/admin/add")
+	public ResponseEntity<?> addAdmin(@RequestBody Admin admin) {
+		 adminService.addAdmin(admin);
+		 Admin admin1 = adminService.findByEmail(admin);
+		 return ResponseEntity.ok(admin1);
 	}
-//	@RequestMapping(value ="/displayD", method = RequestMethod.GET)
-//	public String displayD(ModelMap model) {
-//		System.out.println("Admin's display page");
-//		return "displayD";
-//	}
-//	@RequestMapping(value ="/displayD", method = RequestMethod.POST)
-//	public String displayDPost(ModelMap model) {
-//		System.out.println("Admin's diplay page but for post processing");
-//		return "checkingStudent";
-//	}
-	@RequestMapping(value ="/checkingstudent", method = RequestMethod.GET)
-	public String checked(ModelMap model) {
-		System.out.println("Checking page");
-		return "checkingstudent";
+	@PutMapping("/admin/{id}")
+	public String updateAdminById(@RequestBody Admin admin,@PathVariable int id) {
+		return adminService.updateAdminUserById(admin, id);
 	}
 	
-	@RequestMapping(value ="/checkingPatient", method = RequestMethod.POST)
-	public String checkedPage(ModelMap model) {
-		System.out.println("Checking page processing");
-		return "checked_process";
+	@GetMapping("/admin/{id}")
+	public Admin getAdminById(@PathVariable int id) {
+		return adminService.getAdminById(id);
 	}
-	@RequestMapping(value ="/checked_process", method = RequestMethod.GET)
-	public String checkingProcess(ModelMap model) {
-		System.out.println("Checking process");
-		return "checked_process";
+	
+	@DeleteMapping("/admin/delete/{id}")
+	public void deleteById(@PathVariable int id) {
+		adminService.deleteAdminUserById(id);
 	}
 }
+
+	
+

@@ -1,33 +1,46 @@
 package com.springboot.admissionsystem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.springboot.admissionsystem.entity.Student;
 import com.springboot.admissionsystem.repository.StudentRepository;
+
+
 
 @Service
 public class StudentService {
 	@Autowired
 	private StudentRepository studentRepository;
-
 	
-	public boolean validateUser(String userid, String password) {
-		return userid.equalsIgnoreCase("user")
-				&& password.equalsIgnoreCase("password");
-		
+	public List<Student> getAllStudent(){
+		return studentRepository.findAll();
 	}
-
-	public void savestudent(String student_name, String date_of_birth, String email, String phone, String father_name, String mother_name, String address) {
-		Student s = new Student();
-		s.setStudent_name(student_name);
-		s.setDate_of_birth(date_of_birth);
-		s.setEmail(email);
-		s.setPhone(phone);
-		s.setFather_name(father_name);
-		s.setMother_name(mother_name);
-		s.setAddress(address);
-		studentRepository.save(s);
+	
+	public String addStudent(Student student) {
+		studentRepository.save(student);
+		return "Student Added";
+	}
+	
+	public Student findByEmail(Student student) {
+		Student s = studentRepository.findByEmail(student.getEmail());
+		return s;
+	} 
+	
+	public String updateStudentById(Student student, int id) {
+		student.setId(id);
+		studentRepository.save(student);
+		return "Student Updated";
+	}
+	public Student getStudentById(int id) {
+		return studentRepository.findById(id).get();
+	}
+	public Student getStudentByName(String Name) {
+		return studentRepository.findByName(Name);
+	}
+	
+	public void deleteStudentById(int id) {
+		studentRepository.deleteById(id);
 	}
 }
-

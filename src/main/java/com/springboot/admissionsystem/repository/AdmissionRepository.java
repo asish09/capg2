@@ -1,15 +1,17 @@
 package com.springboot.admissionsystem.repository;
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 import com.springboot.admissionsystem.entity.Admission;
-@Repository
-public interface AdmissionRepository extends CrudRepository<Admission, Integer>{
-	List<Admission> findByCourse(String course);
-	List<Admission> findByStudent(String student);
-	
+
+public interface AdmissionRepository extends JpaRepository<Admission, String>{
+	List<Admission> findByGender(String gender);
+	List<Admission> findByfirstName(String firstName);
+	List<Admission> findBylastName(String lastName);
+	void deleteById(int id);
+
+
+
 }
-
-
 

@@ -2,7 +2,6 @@ package com.springboot.admissionsystem.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,13 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.springboot.admissionsystem.controller.UniversityController;
+
 import com.springboot.admissionsystem.entity.University;
 import com.springboot.admissionsystem.service.UniversityService;
 
+
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:8085/")
 public class UniversityController {
+
 	@Autowired
 	private UniversityService universityService;
 
@@ -29,28 +30,30 @@ public class UniversityController {
 	}
 	
 	@PostMapping("/university/add")
-	public void addUniversity(@RequestBody University u) {
-		universityService.addUniversity(u);
+	public ResponseEntity<?> addUniversity(@RequestBody University university) {
+		System.out.println("The University name is :" + university.getUniversityName());
+		universityService.addUniversity(university);
+		return ResponseEntity.ok(university);
 	}
 	
 	@PutMapping("/university/{id}")
-	public String updateUniversityById(@RequestBody University u,@PathVariable int uid) {
-		return universityService.updateUniversityById(u, uid);
+	public String updateUniversityById(@RequestBody University university,@PathVariable int id) {
+		return universityService.updateUniversityById(university, id);
 	}
 	
-	@GetMapping("university/university_Name")
-	public ResponseEntity<List<University>> getUniversityByName(@RequestParam String university_Name){
-		return new ResponseEntity<List<University>>(universityService.getUniversityByName(university_Name),HttpStatus.OK) ;
-	}
+//	@GetMapping("university/location")
+//	public ResponseEntity<List<University>> getUniversityByLocation(@RequestParam String location){
+//		return new ResponseEntity<List<University>>(UniversityService.getUniversityByLocation(location),HttpStatus.OK) ;
+//	}
 	
 	@DeleteMapping("/university/delete/{id}")
-	public void deleteById(@PathVariable int uid) {
-		 universityService.deleteById(uid);
+	public void deleteById(@PathVariable int id) {
+		universityService.deleteById(id);
 	}
 	
-	@GetMapping("university/location")
-	public List<University> getUniversityByLocation(@RequestParam String location) {
-		return universityService.getUniversityByLocation(location);
+	@GetMapping("university/universityName")
+	public List<University> getUniversityByUniversityName(@RequestParam String universityName) {
+		return universityService.getUniversityByUniversityName(universityName);
 	}
 	
 }

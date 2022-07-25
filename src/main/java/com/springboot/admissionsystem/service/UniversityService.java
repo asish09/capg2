@@ -7,33 +7,37 @@ import com.springboot.admissionsystem.repository.UniversityRepository;
 @Service
 public class UniversityService {
 	@Autowired
-	UniversityRepository universityRepository;
+	private UniversityRepository universityRepository;
+
 	public List<University> getAllUniversity(){
 		return (List<University>) universityRepository.findAll();
 		
 	}
-	public String addUniversity(University u) {
-		universityRepository.save(u);
+	public String addUniversity(University university) {
+		System.out.println(university.getUniversityName());
+		universityRepository.save(university);
 		return "University Added";
 	}
-	public String updateUniversityById(University university, int uid) {
-		university.setUid(uid);
+	public String updateUniversityById(University university, int id) {
+		university.setId(id);
 		universityRepository.save(university);
 		return "University Updated";
 	}
 	public List<University> getUniversityByLocation(String location){
-		return universityRepository.findByLocation(location);
+		return universityRepository.getUniversityByLocation(location);
 	}
-	public String deleteById(int uid) {
-		universityRepository.deleteById(uid);
+	public String deleteById(int id) {
+		universityRepository.deleteById(id);
 		return "university deleted";
 	}
-	public List<University> getUniversityByName(String university_name){
-		return universityRepository.findByUniversity_name(university_name);
+	public List<University> getUniversityByUniversityName(String universityName){
+		return universityRepository.getUniversityByUniversityName(universityName);
 		
 		
 	}
 	
 	
+
+
 
 }
